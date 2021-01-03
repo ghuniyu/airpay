@@ -63,12 +63,12 @@ class Transaction extends Resource
                 'debit' => 'Debit',
                 'credit' => 'Credit',
             ])->displayUsingLabels(),
-            Text::make('Info'),
-            Textarea::make('Note'),
             Number::make('Gross Amount')
                 ->displayUsing(function ($amount) {
                     return 'Rp ' . number_format($amount ?? 0);
                 }),
+            Text::make('Info'),
+            Textarea::make('Note'),
             Text::make('Payment Info', 'note'),
             Select::make('Status')
                 ->options(['created' => 'Created', 'pending' => 'Pending', 'success' => 'Success', 'completed' => 'Completed', 'canceled' => 'Canceled'])

@@ -60,8 +60,8 @@ class Wallet extends Model
                 Transaction::create([
                     'user_id' => $this->user->id,
                     'type' => 'debit',
-                    'info' => "Approved by System",
-                    'note' => "Withdraw by User",
+                    'info' => "Requested by User",
+                    'note' => "Withdraw Successful",
                     'gross_amount' => $this['balance'],
                     'payment_method_id' => 'airpay',
                     'status' => 'success',

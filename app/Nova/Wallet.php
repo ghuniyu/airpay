@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\Withdraw;
 use App\Traits\AirpayOnly;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -102,6 +103,8 @@ class Wallet extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            Withdraw::make()
+        ];
     }
 }
