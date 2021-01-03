@@ -15,6 +15,11 @@ class Wallet extends Resource
 {
     use AirpayOnly;
 
+    public function getId()
+    {
+        return $this['user']['id'];
+    }
+
     public static function indexQuery(NovaRequest $request, $query)
     {
         if (self::isAirpay())
@@ -22,6 +27,7 @@ class Wallet extends Resource
         else
             return $query->whereUserId(auth()->id());
     }
+
     /**
      * The model the resource corresponds to.
      *
@@ -31,7 +37,7 @@ class Wallet extends Resource
 
     public function title()
     {
-        return $this->user->name ." Wallet";
+        return $this->user->name . " Wallet";
     }
 
     /**
@@ -52,12 +58,18 @@ class Wallet extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('User', 'user', User::class),
+            ID::make(__('ID'), 'id')->sortable()
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+            BelongsTo::make('User', 'user', User::class)
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
             Number::make('Balance')
                 ->displayUsing(function ($amount) {
                     return 'Rp ' . number_format($amount);
-                }),
+                })
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
         ];
     }
 

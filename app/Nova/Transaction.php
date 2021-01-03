@@ -5,6 +5,8 @@ namespace App\Nova;
 use App\Traits\AirpayOnly;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -72,7 +74,9 @@ class Transaction extends Resource
             Text::make('Payment Info', 'note'),
             Select::make('Status')
                 ->options(['created' => 'Created', 'pending' => 'Pending', 'success' => 'Success', 'completed' => 'Completed', 'canceled' => 'Canceled'])
-                ->displayUsingLabels()
+                ->displayUsingLabels(),
+            DateTime::make('Date', 'created_at')
+                ->format('D MMM Y, hh:mm:ss')
         ];
     }
 
