@@ -39,6 +39,6 @@ trait AirpayOnly
 
     public static function authorizedToCreate(Request $request)
     {
-        self::isAirpay();
+        return self::isAirpay();
     }
 }
