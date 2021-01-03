@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 trait AirpayOnly
 {
@@ -18,7 +19,7 @@ trait AirpayOnly
 
     public static function isAirpay()
     {
-        return auth()->user()->role->id == 'airpay';
+        return Str::lower(auth()->user()->role->id) == 'airpay';
     }
 
     public function authorizedToView(Request $request)
