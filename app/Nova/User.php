@@ -76,8 +76,8 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
             BelongsTo::make('Role', 'role', Role::class)
-                ->hideWhenUpdating()
-                ->hideWhenCreating(),
+                ->hideWhenUpdating(!self::isAirpay())
+                ->hideWhenCreating(!self::isAirpay()),
             Password::make('Password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
