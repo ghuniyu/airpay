@@ -69,12 +69,7 @@ class Transaction extends Resource
                 ->displayUsing(function ($amount) {
                     return 'Rp ' . number_format($amount ?? 0);
                 }),
-            Select::make('Payment Type')
-                ->options([
-                    'wallet' => 'Wallet',
-                    'bank_transfer' => 'Bank Transfer',
-                ])
-                ->displayUsingLabels(),
+            Text::make('Payment Info', 'note'),
             Select::make('Status')
                 ->options(['created' => 'Created', 'pending' => 'Pending', 'success' => 'Success', 'completed' => 'Completed', 'canceled' => 'Canceled'])
                 ->displayUsingLabels()

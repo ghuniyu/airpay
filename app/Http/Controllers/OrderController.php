@@ -102,8 +102,12 @@ class OrderController extends Controller
         }
     }
 
-    public function buy()
+    public function all()
     {
-
+        $user = auth()->user()->load('orders');
+        return response()->json([
+            'success' => true,
+            'data' => $user['orders']
+        ]);
     }
 }
