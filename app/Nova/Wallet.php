@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\PaymentPoint;
 use App\Nova\Actions\Withdraw;
 use App\Traits\AirpayOnly;
 use Illuminate\Http\Request;
@@ -28,12 +29,10 @@ class Wallet extends Resource
      */
     public static $model = \App\Models\Wallet::class;
 
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'id';
+    public function title()
+    {
+        return $this->user->name ." Wallet";
+    }
 
     /**
      * The columns that should be searched.
@@ -104,7 +103,8 @@ class Wallet extends Resource
     public function actions(Request $request)
     {
         return [
-            Withdraw::make()
+            Withdraw::make(),
+            PaymentPoint::make()
         ];
     }
 }

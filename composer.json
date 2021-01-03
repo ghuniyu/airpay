@@ -20,6 +20,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hubertnnn/laravel-nova-field-dynamic-select": "^0.2.0",
         "laravel/framework": "^8.12",
         "laravel/nova": "^3.18",
         "laravel/tinker": "^2.5"

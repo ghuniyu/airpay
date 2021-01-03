@@ -3,10 +3,13 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 
 class PostPay extends FormRequest
 {
+    public Collection $options;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,18 +30,26 @@ class PostPay extends FormRequest
         $rules = [];
 
         $paymentMethod = $this->route('paymentMethod');
-        $options = collect(json_decode($paymentMethod['options'], true));
-        if (is_array($options->first())) {
-            $options = $options->keys();
+        $this->options = collect(json_decode($paymentMethod['options'], true));
+        if (is_array($this->options->first())) {
+            $this->options = $this->options->keys();
         }
 
-        if ($paymentMethod['id'] !== 'airpay'){
+        if ($paymentMethod['id'] !== 'airpay') {
             $rules['option'] = [
                 'required',
-                Rule::in($options)
+                Rule::in($this->options)
             ];
         }
 
         return $rules;
+    }
+
+    public function messages()
+    {
+        $available = $this->options->join(', ');
+        return [
+            'in' => "The selected option is invalid only : $available are available"
+        ];
     }
 }
