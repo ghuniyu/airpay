@@ -34,12 +34,16 @@ class OrderController extends Controller
 
     public function get(Order $order)
     {
+        $data = [
+            'order' => $order,
+        ];
+
+        if ($order['status'] =='created')
+            $data['payment_methods'] = PaymentMethod::all();
+
         return response()->json([
             'success' => true,
-            'data' => [
-                'order' => $order,
-                'payment_methods' => PaymentMethod::all()
-            ]
+            'data' => $data
         ]);
     }
 
