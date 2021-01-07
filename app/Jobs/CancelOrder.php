@@ -32,7 +32,9 @@ class CancelOrder implements ShouldQueue
      */
     public function handle()
     {
-        $result = Order::where('status', '!=', 'success')->where('status', '!=', 'canceled')->where('expired_at', '<=', now())->update([
+        $result = Order::where('status', '!=', 'success')
+            ->where('status', '!=', 'canceled')
+            ->where('expired_at', '<=', now())->update([
             'status' => 'canceled'
         ]);
 

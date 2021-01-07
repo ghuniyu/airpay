@@ -22,7 +22,7 @@ class OrderController extends Controller
 
         $valid['status'] = 'created';
         $valid['user_id'] = auth()->id();
-        $valid['expired_at'] = now()->addMinutes(60);
+        $valid['expired_at'] = now()->addMinutes(env('EXPIRED', 60));
         $order = Order::create($valid);
 
 
