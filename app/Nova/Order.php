@@ -63,7 +63,6 @@ class Order extends Resource
                 ->displayUsing(function ($amount) {
                     return 'Rp ' . number_format($amount);
                 }),
-            Text::make('Payment Type'),
             Select::make('Status')
                 ->options(['created' => 'Created', 'pending' => 'Pending', 'success' => 'Success', 'completed' => 'Completed', 'canceled' => 'Canceled'])
                 ->displayUsingLabels()
